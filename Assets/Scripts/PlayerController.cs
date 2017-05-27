@@ -79,22 +79,6 @@ public class PlayerController : MonoBehaviour {
                 transform.Translate(1f, 0f, 0f);
                 break;
         }
-        canMove = false;
         Notify(dir);
-    }
-
-    public void AlarmHandler(STATE state)
-    {
-        switch (state)
-        {
-            case STATE.TIMEIN:
-                Debug.Log("Time in");
-                canMove = true;
-                break;
-            case STATE.TIMEOUT:
-                Debug.Log("Time out");
-                canMove = false;
-                break;
-        }
     }
 }

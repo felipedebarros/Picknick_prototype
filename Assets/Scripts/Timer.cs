@@ -7,11 +7,7 @@ public enum STATE { START, TIMEIN, TIMEOUT, TIMEOVER };
 public class Timer : MonoBehaviour {
 
     [SerializeField]
-    private float timeIn_;
-    [SerializeField]
     private float timeOut_;
-    [SerializeField]
-    private float timeOver_;
 
     private Coroutine current;
 
@@ -59,7 +55,7 @@ public class Timer : MonoBehaviour {
 
     public void StopTimer()
     {
-        StopCoroutine(current);
+        StopAllCoroutines();
     }
 
 
@@ -71,11 +67,7 @@ public class Timer : MonoBehaviour {
 
     private IEnumerator Clock()
     {
-        yield return new WaitForSeconds(timeIn_);
-        State = STATE.TIMEIN;
         yield return new WaitForSeconds(timeOut_);
         State = STATE.TIMEOUT;
-        yield return new WaitForSeconds(timeOver_);
-        State = STATE.TIMEOVER;
     }
 }

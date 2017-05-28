@@ -2,17 +2,19 @@
 using System;
 using System.Collections;
 
-public enum STATE { START, TIMEIN, TIMEOUT, TIMEOVER };
+public enum STATE { START, TIMEIN, TIMEOUT, NONE };
 
 public class Timer : MonoBehaviour {
 
     [SerializeField]
     private float timeOut_;
+    [SerializeField]
+    private float timeIn_;
 
-    private Coroutine current;
+    private STATE lastState_;
 
     #region Observer
-    private STATE state_;
+    private STATE state_ = STATE.NONE;
     private STATE State
     {
         get { return state_; }
@@ -49,8 +51,8 @@ public class Timer : MonoBehaviour {
 
     public void StartTimer()
     {
-        State = STATE.START;
-        current = StartCoroutine(Clock());
+        State = STATE.NONE;
+        StartCoroutine(Clock());
     }
 
     public void StopTimer()
@@ -67,6 +69,8 @@ public class Timer : MonoBehaviour {
 
     private IEnumerator Clock()
     {
+        yield return new WaitForSeconds(timeIn_);
+        State = STATE.TIMEIN;
         yield return new WaitForSeconds(timeOut_);
         State = STATE.TIMEOUT;
     }

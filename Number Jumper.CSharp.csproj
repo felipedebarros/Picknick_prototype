@@ -79,9 +79,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BoardGenerator.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MovingObject.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
+    <Compile Include="Assets\_Complete-Game\Scripts\BoardManager.cs" />
+    <Compile Include="Assets\_Complete-Game\Scripts\Enemy.cs" />
+    <Compile Include="Assets\_Complete-Game\Scripts\GameManager.cs" />
+    <Compile Include="Assets\_Complete-Game\Scripts\Loader.cs" />
+    <Compile Include="Assets\_Complete-Game\Scripts\MovingObject.cs" />
+    <Compile Include="Assets\_Complete-Game\Scripts\Player.cs" />
+    <Compile Include="Assets\_Complete-Game\Scripts\SoundManager.cs" />
+    <Compile Include="Assets\_Complete-Game\Scripts\Wall.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

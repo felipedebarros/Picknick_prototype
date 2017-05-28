@@ -80,5 +80,14 @@ public class PlayerController : MonoBehaviour {
                 break;
         }
         Notify(dir);
+        canMove = false;
+    }
+
+    public void HandleTimer(STATE state)
+    {
+        if (state == STATE.TIMEOUT)
+            canMove = false;
+        else if (state == STATE.TIMEIN)
+            canMove = true;
     }
 }

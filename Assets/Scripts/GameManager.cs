@@ -1,21 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
     private Timer timer_;
     private bool firstMove = true;
 
+    #region MovingObjects_Update
+
+    private List<MovingObject> movingObjects_ = new List<MovingObject>();
+
+    public void Subscribe(MovingObject mo) { movingObjects_.Add(mo); }
+
+    private void UpdateMovingObjects()
+    {
+        foreach(MovingObject mo in movingObjects_)
+            mo.nextTurn();
+    }
+
+    #endregion
+
     void Start()
     {
         timer_ = GetComponent<Timer>();
-        timer_.Alarm += Alarm;
+        timer_.Alarm += HandleAlarm;
         var player = FindObjectOfType<PlayerController>();
         player.OnMoved += playerMoved;
+        timer_.Alarm += player.HandleTimer;
     }
-
-	void Update () {
-       
-	}
 
     void playerMoved(DIRECTION dir)
     {
@@ -26,7 +38,7 @@ public class GameManager : MonoBehaviour {
         NextTurn();
     }
 
-    void Alarm(STATE state)
+    void HandleAlarm(STATE state)
     {
         if (state == STATE.TIMEOUT)
         {
@@ -36,7 +48,9 @@ public class GameManager : MonoBehaviour {
 
     void NextTurn()
     {
-        timer_.ResetTimer();
-        //Debug.Log("Change turn");
+        timer_.StopTimer();
+        UpdateMovingObjects();
+        timer_.StartTimer();
+        Debug.Log("Change turn");
     }
 }

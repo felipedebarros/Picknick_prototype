@@ -13,6 +13,8 @@ public class BoardGenerator : MonoBehaviour {
     private GameObject cellBlack;
     [SerializeField]
     private GameObject cellWhite;
+    [SerializeField]
+    private GameObject enemyGO;
 
     private GameObject[,] board;
     private Vector2 playerTile;
@@ -42,6 +44,12 @@ public class BoardGenerator : MonoBehaviour {
                     board[i % widht, j % height] = cell;
                 }
             }
+
+        int x = Random.Range(0, widht);
+        int y = Random.Range(0, height);
+
+        GameObject enemy = Instantiate(enemyGO, new Vector3(x - widht / 2, 0.375f, y - height / 2), enemyGO.transform.rotation, transform);
+        FindObjectOfType<GameManager>().GetComponent<GameManager>().Subscribe(enemy.GetComponent<Enemy>());
 
     }
 
